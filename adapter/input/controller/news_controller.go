@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/felipeazsantos/hexagonal-news-api/adapter/input/model/request"
 	"github.com/felipeazsantos/hexagonal-news-api/application/domain"
 	"github.com/felipeazsantos/hexagonal-news-api/application/port/input"
@@ -35,5 +37,11 @@ func (nc *newsController) GetNews(c *gin.Context) {
 		From:    newsRequest.From,
 	}
 
-	_, _ = nc.newsUseCase.GetNewsService(newsReqDomain)
+	newsDomain, err := nc.newsUseCase.GetNewsService(newsReqDomain)
+	if err != nil {
+		c.JSON(err.Code, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, newsDomain)
 }
