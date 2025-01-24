@@ -2,23 +2,27 @@ package domain
 
 type NewsReqDomain struct {
 	Subject string
-	From string
+	From    string
 }
 
 type NewsDomain struct {
 	Status       string
-	TotalResults string
-	Articiles    []Article
+	TotalResults int
+	Articles     []Article
 }
 
 type Article struct {
-	Source      string
-	ID          string
-	Name        string
+	Source      ArticleSource
+	Author      string
 	Title       string
 	Description string
 	URL         string
 	UrlToImage  string
 	PublishedAt string
 	Content     string
+}
+
+type ArticleSource struct {
+	ID   *string
+	Name string
 }

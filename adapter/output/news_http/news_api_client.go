@@ -4,6 +4,7 @@ import (
 	"github.com/felipeazsantos/hexagonal-news-api/adapter/output/model/response"
 	"github.com/felipeazsantos/hexagonal-news-api/application/domain"
 	"github.com/felipeazsantos/hexagonal-news-api/configuration/env"
+	"github.com/felipeazsantos/hexagonal-news-api/configuration/logger"
 	"github.com/felipeazsantos/hexagonal-news-api/configuration/rest_err"
 	"github.com/go-resty/resty/v2"
 	"github.com/jinzhu/copier"
@@ -31,6 +32,7 @@ func (nc *newsClient) GetNews(newsReqDomain domain.NewsReqDomain) (*domain.NewsD
 		Get("/everything")
 
 	if err != nil {
+		logger.Error("Error trying to call NewsAPI with params:", err)
 		return nil, rest_err.NewInternalServerError("Error trying to call NewsAPI with params")
 	}
 
