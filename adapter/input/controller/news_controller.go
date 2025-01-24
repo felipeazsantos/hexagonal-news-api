@@ -34,7 +34,7 @@ func (nc *newsController) GetNews(c *gin.Context) {
 
 	newsReqDomain := domain.NewsReqDomain{
 		Subject: newsRequest.Subject,
-		From:    newsRequest.From,
+		From:    newsRequest.From.Format("2006-01-02"),
 	}
 
 	newsDomain, err := nc.newsUseCase.GetNewsService(newsReqDomain)
