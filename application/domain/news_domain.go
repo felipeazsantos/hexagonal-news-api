@@ -1,5 +1,10 @@
 package domain
 
+type NewsReqDomain struct {
+	Subject string
+	From string
+}
+
 type NewsDomain struct {
 	Status       string
 	TotalResults string
